@@ -13,6 +13,14 @@ module.exports = function(sequelize) {
       type: Sequelize.STRING,
       allowNull: true
     },
+    github: {
+      type: Sequelize.JSON,
+      allowNull: true
+    },
+    accessToken: {
+      type: Sequelize.STRING,
+      allowNull: true
+    }
   }, {
     freezeTableName: true
   });

@@ -4,6 +4,20 @@ const globalHooks = require('../../../hooks');
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 
+const showUser = function(options) {
+  return function(hook) {
+    console.log('>>> user')
+    console.log(hook.params.user.github);
+    const text = hook.data.text;
+    const userData = hook.params.user.github;
+
+    hook.data = {
+      text,
+      sentById: userData.id,
+      sentByName: userData.login
+    }
+  }
+}
 exports.before = {
   all: [
     auth.verifyToken(),
@@ -12,7 +26,8 @@ exports.before = {
   ],
   find: [],
   get: [],
-  create: [() => {console.log('hello')}
+  create: [
+    showUser()
   ],
   update: [],
   patch: [],

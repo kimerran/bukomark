@@ -64,11 +64,12 @@
     <main class="container">
       <h2 class="center-text">A minimalist real-time framework for tomorrow's apps.</h2>
       
+      <a href="/auth/github/">Login to gitub</a>
       <footer>
         <p class="center-text">For more information on Feathers see <a href="http://docs.feathersjs.com" alt="Feathers Documentation" target="blank">docs.feathersjs.com</a>.</p>
       </footer>
     </main>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+    <!--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
     <script src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script type="text/javascript">
@@ -85,24 +86,23 @@
       // Retrieve a connection to the /messages service on the server
       // This service will use websockets for all communication
       const messages = app.service('messages');
-      const userService = app.service('users');
+     // const userService = app.service('users');
 
       // Listen for when a new message has been created
       messages.on('created', function(message) {
         console.log('Someone created a message', message);
       });
       
-      app.authenticate().then(function(){
-        console.log(1)
-        userService.find()
-          .then(res => console.log(res));
-          messages.create({
-            text: 'booyah!'
-          })
-          .catch(err => console.log(err))
-      }, function() {
-        window.location = '/auth/github';
-      });
+      app
+        .authenticate()
+        .then(function(){
+          console.log('inside authenticate');
+          console.log(app.get('token'));
+        })
+        .catch((err) => {
+          console.log('err:', err)
+          window.location = '/auth/github';
+        });-->
     </script>
   </body>
 </html>

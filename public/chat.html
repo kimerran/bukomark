@@ -80,31 +80,34 @@
         .configure(feathers.socketio(socket))
         .configure(feathers.hooks())
         .configure(feathers.authentication({
-          storage: window.localStorage
+          storage: window.localStorage,
+          idField: "githubId"
         }));
       // Retrieve a connection to the /messages service on the server
       // This service will use websockets for all communication
-      const messages = app.service('messages');
-      const userService = app.service('users');
+      const messages = app.service('/messages');
+      const userService = app.service('/users');
 
       // Listen for when a new message has been created
       messages.on('created', function(message) {
         console.log('Someone created a message', message);
       });
       
-      app.authenticate({
-        //type: 'token',
-        //endpoint: '/auth/github'
-      }).then((res) => {
-        console.log(1)
-        console.log(res);
-        //userService.find().then(res => console.log(res));
-        messages.create({
-          text: 'booyah!'
+      app
+        .authenticate()
+        .then((res) => {
+          console.log(1)
+          console.log(res);
+          console.log(app.get('token'));
+          //userService.find().then(res => console.log(res));
+          userService.find({}).then(res => console.log(res.data))
+
+          messages.create({
+            text: 'booyah!'
+          })
+          .catch(err => console.log(err))
         })
-        .catch(err => console.log(err))
-      })
-      .catch(err => console.log(err));
+        .catch(err => console.log(err));
     </script>
   </body>
 </html>

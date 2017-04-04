@@ -12,6 +12,14 @@ module.exports = function(sequelize) {
     text: {
       type: Sequelize.STRING,
       allowNull: false
+    },
+    sentById: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    sentByName: {
+      type: Sequelize.STRING,
+      allowNull: true
     }
   }, {
     freezeTableName: true
