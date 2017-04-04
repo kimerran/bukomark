@@ -3,6 +3,8 @@ import {bindActionCreators} from "redux";
 import {connect}            from "react-redux";
 import {SayHello}           from "../actions/main.actions";
 
+import ChatBox from '../components/chat_box';
+
 class MainApp extends React.Component {
   constructor(props) {
     super(props);
@@ -14,8 +16,7 @@ class MainApp extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.props.mainReducer.message}</h1>
-        <button onClick={this.props.SayHello}>Click Me</button>
+        <ChatBox />
       </div>
     );
   }

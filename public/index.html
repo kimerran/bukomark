@@ -1,108 +1,26 @@
 <html>
   <head>
-    <title>Welcome to Feathers</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html, body {
-        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
-        font-weight: 400;
-        font-size: 16px;
-        color: #333;
-      }
-
-      .center-text {
-        text-align: center;
-      }
-
-      main {
-        margin-top: 100px;
-        padding: 20px;
-      }
-
-      img.logo {
-        display: block;
-        margin: 0 auto;
-        max-width: 100%;
-        margin-bottom: 30px;
-      }
-
-      h2 {
-        font-size: 2em;
-        font-weight: 100;
-      }
-
-      footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 20px;
-      }
-
-      footer p {
-        font-weight: 300;
-        font-size: 1.0em;
-      }
-
-      a {
-        color: #31D8A0;
-        text-decoration: none;
-      }
-
-      a:hover,
-      a:focus {
-        color: #31D8A0;
-      }
-    </style>
+    <title>BUKOMARK</title>
+    <link rel="stylesheet" href="/semantic-ui/semantic.min.css"> 
   </head>
   <body>
-    <main class="container">
-      <h2 class="center-text">A minimalist real-time framework for tomorrow's apps.</h2>
-      
-      <a href="/auth/github/">Login to gitub</a>
-      <footer>
-        <p class="center-text">For more information on Feathers see <a href="http://docs.feathersjs.com" alt="Feathers Documentation" target="blank">docs.feathersjs.com</a>.</p>
-      </footer>
-    </main>
-    <!--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-    <script src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js"></script>
-    <script src="socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-      // Establish a Socket.io connection to the local server
-      var socket = io();
-      // Create a client side Feathers application that uses the socket
-      // for connecting to services
-      var app = feathers()
-        .configure(feathers.socketio(socket))
-        .configure(feathers.hooks())
-        .configure(feathers.authentication({
-          storage: window.localStorage
-        }));
-      // Retrieve a connection to the /messages service on the server
-      // This service will use websockets for all communication
-      const messages = app.service('messages');
-     // const userService = app.service('users');
+    <main class="ui container" style="margin-top: 10px;">
+      <div class="ui segments">
+        <div class="ui segment center aligned" style="background-color: black;">
+          <h2 class="ui center aligned icon header inverted">
+            <i class="circular users icon inverted"></i>
+            bukomark
+          </h2>
 
-      // Listen for when a new message has been created
-      messages.on('created', function(message) {
-        console.log('Someone created a message', message);
-      });
-      
-      app
-        .authenticate()
-        .then(function(){
-          console.log('inside authenticate');
-          console.log(app.get('token'));
-        })
-        .catch((err) => {
-          console.log('err:', err)
-          window.location = '/auth/github';
-        });-->
-    </script>
+          <div class="ui labeled button center aligned" tabindex="0">
+            <div class="ui pink button inverted">
+              <a href="/auth/github/" class="ui basic pink inverted">
+                <i class="github icon inverted"></i> Login to Github
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

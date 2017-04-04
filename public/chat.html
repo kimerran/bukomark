@@ -1,51 +1,15 @@
 <html>
   <head>
-    <title>Buko-Chat</title>
+    <title>BUKOMARK</title>
+    <link rel="stylesheet" href="/semantic-ui/semantic.min.css"> 
   </head>
   <body>
-    <main class="container">
-      <div id="root"></div>
+    <main class="ui container" style="margin-top: 10px;">
+      <div class="ui segments">
+        <div id="root" class="ui segment" style="min-height: 500px;">
+        </div>
+      </div>
+      <script src="js/bukomark.js"></script>
     </main>
-    <script src="/js/bukomark.js"></script>
-    <!--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-    <script src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js"></script>
-    <script src="socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-      // Establish a Socket.io connection to the local server
-      var socket = io();
-      // Create a client side Feathers application that uses the socket
-      // for connecting to services
-      var app = feathers()
-        .configure(feathers.socketio(socket))
-        .configure(feathers.hooks())
-        .configure(feathers.authentication({
-          storage: window.localStorage
-        }));
-      // Retrieve a connection to the /messages service on the server
-      // This service will use websockets for all communication
-      const messages = app.service('/messages');
-      const userService = app.service('/users');
-
-      // Listen for when a new message has been created
-      messages.on('created', function(message) {
-        console.log('Someone created a message', message);
-      });
-      
-      app
-        .authenticate()
-        .then((res) => {
-          console.log(1)
-          console.log(res);
-          console.log(app.get('token'));
-          //userService.find().then(res => console.log(res));
-          userService.find({}).then(res => console.log(res.data))
-
-          messages.create({
-            text: 'booyah!'
-          })
-          .catch(err => console.log(err))
-        })
-        .catch(err => console.log(err));-->
-    </script>
   </body>
 </html>

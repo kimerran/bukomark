@@ -43,7 +43,7 @@ exports.before = {
 exports.after = {
   all: [hooks.remove('password')],
   find: [],
-  get: [populate()],
+  get: [],
   create: [],
   update: [],
   patch: [],

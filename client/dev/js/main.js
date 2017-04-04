@@ -39,6 +39,7 @@ app.authenticate()
   })
   .catch((err) => {
     // redirect to home page
+    console.log(err);
     window.location = '/';
   })
 
