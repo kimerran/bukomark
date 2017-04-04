@@ -4,7 +4,49 @@ import MessageBox from './message_box';
 import ChatMessage from './chat_message';
 
 class ChatBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.app = props.app;
 
+    this.state = {
+      messages: []
+    }
+
+    this.app.service('messages').on('created', (msg) => {
+      console.log('created', msg);
+      const messages = this.state.messages;
+      messages.push(msg);
+      this.setState({messages: messages.reverse().slice(0,12)});
+    });
+
+    this.createMessage = this.createMessage.bind(this);
+    this.renderList = this.renderList.bind(this);
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({messages: props.messages})
+  }
+
+  createMessage(newMsg) {
+    const message = {
+      text: newMsg
+    };
+    console.log(message)
+    this.app.service('messages').create(message)
+      .then((msg) => console.log('created'))
+      .catch(err => console.log(err))
+  }
+
+  renderList() {
+    console.log('renderList', this.state)
+    return (
+      this.state.messages.reverse().map(msg => {
+        return (
+          <ChatMessage key={msg.id} message={msg} />
+        )
+      })
+    )
+  }
 
   render() {
     return (
@@ -13,13 +55,11 @@ class ChatBox extends React.Component {
           className="ui segment list" 
           style={styles.list}
         >
-
-
-
+          {this.renderList()}
         </div>
 
         <div className="ui segment">
-          <MessageBox />
+          <MessageBox onCreate={this.createMessage} />
         </div>
       </div>
     )
@@ -29,9 +69,10 @@ class ChatBox extends React.Component {
 const styles = {
   container: {
     overflow: 'hidden',
-    minHeight: '500px',
   },
   list: {
+    minHeight: '500px',
+
     maxHeight: '500px',
     overflowY: 'scroll'
   }

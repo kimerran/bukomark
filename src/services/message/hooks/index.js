@@ -7,24 +7,22 @@ const auth = require('feathers-authentication').hooks;
 
 var checkUser = function(options = {}) {
   return function(hook) {
-    console.log('checkUser')
-    console.log(hook.params)
-  hook.app.service(options.userEndpoint).get(1, {}).then(user => {
-    //hook.app.service('users').get
+    // console.log('checkUser')
+    // console.log(hook.params)
+  // hook.app.service(options.userEndpoint).get(1, {}).then(user => {
+  //   //hook.app.service('users').get
 
+  // })
   }
 }
 
 var addMessageBy = function(options = {}) {
   return function(hook) {
-    console.log('addMessageBy')
-    console.log(hook.params.user)
     hook.data = {
       text: hook.data.text,
-      messageBy: hook.params.user._id
+      sentById: hook.params.user.githubId,
+      sentByName: hook.params.user.github.login
     }
-    console.log(hook.data)
-
   }
 }
 
@@ -39,7 +37,7 @@ exports.before = {
   ],
   find: [],
   get: [],
-  create: [],
+  create: [addMessageBy()],
   update: [],
   patch: [],
   remove: []

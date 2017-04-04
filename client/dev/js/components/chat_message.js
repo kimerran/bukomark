@@ -6,8 +6,8 @@ class ChatMessage extends React.Component {
     super(props);
     this.state = {
       text: props.message.text,
-      from: props.message.from,
-      avatar: props.message.avatar
+      from: props.message.sentByName,
+      avatar: `https://avatars2.githubusercontent.com/u/${props.message.sentById}?v=3`
     }
   }
 
