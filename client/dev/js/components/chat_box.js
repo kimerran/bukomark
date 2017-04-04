@@ -13,7 +13,6 @@ class ChatBox extends React.Component {
     }
 
     this.app.service('messages').on('created', (msg) => {
-      console.log('created', msg);
       const messages = this.state.messages;
       messages.push(msg);
       this.setState({messages: messages.reverse().slice(0,12)});
@@ -31,7 +30,7 @@ class ChatBox extends React.Component {
     const message = {
       text: newMsg
     };
-    console.log(message)
+
     this.app.service('messages').create(message)
       .then((msg) => console.log('created'))
       .catch(err => console.log(err))

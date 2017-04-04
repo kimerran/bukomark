@@ -7,7 +7,6 @@ import MainApp      from "./containers/main.container";
 
 
 const socket = io();
-const logger = createLogger();
 
 const app = feathers()
   .configure(feathers.socketio(socket))

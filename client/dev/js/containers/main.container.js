@@ -15,21 +15,36 @@ class MainApp extends React.Component {
           $limit: 12
         }})
       .then((page) => {
-        this.messages = page.data;
-        console.log('>>>>')
-        this.setState({messages: page.data})
-        console.log(this.messages);
+        this.setState({messages: page.data});
+      })
+      .catch((err) => {
+        console.log(err);
+        this.app.logout();
+        window.location = '/';
+      });
+
+      this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    const user = this.app.get('user');
+    this.app.service('users')
+      .remove(user.id)
+      .then(() => {
+        this.app.logout();
+        window.location = '/';
       });
   }
 
   render() {
+    const user = this.app.get('user');
     return (
       <div>
         <ChatBox app={this.app} messages={this.state.messages} />
+        <button onClick={this.logout}>log out ({user.github.login})</button>
       </div>
     );
   }
 }
-
 
 export default MainApp;

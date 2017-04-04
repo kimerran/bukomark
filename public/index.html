@@ -15,12 +15,31 @@
           <div class="ui labeled button center aligned" tabindex="0">
             <div class="ui pink button inverted">
               <a href="/auth/github/" class="ui basic pink inverted">
-                <i class="github icon inverted"></i> Login to Github
+                <i class="github icon inverted"></i> Login via Github
               </a>
             </div>
           </div>
         </div>
       </div>
     </main>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+    <script src="//unpkg.com/feathers-client@^1.0.0/dist/feathers.js">
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const app = feathers()
+        .configure(feathers.socketio(socket))
+        .configure(feathers.hooks())
+        .configure(feathers.authentication({
+          storage: window.localStorage
+        }));
+      app.authenticate().then(() => {
+        console.log('success!')
+        console.log(app.get('user'))
+        window.location = '/chat.html';
+      })
+      .catch(err => console.log(err));
+    </script>
   </body>
 </html>
