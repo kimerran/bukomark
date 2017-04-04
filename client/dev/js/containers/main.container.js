@@ -1,8 +1,4 @@
-import React                from "react";
-import {bindActionCreators} from "redux";
-import {connect}            from "react-redux";
-import {SayHello}           from "../actions/main.actions";
-
+import React from 'react';
 import ChatBox from '../components/chat_box';
 
 class MainApp extends React.Component {
@@ -13,12 +9,11 @@ class MainApp extends React.Component {
       messages: []
     }
 
-
     this.app.service('messages').find({
         query: {
           $sort: { createdAt: -1 },
           $limit: 12
-        }}) 
+        }})
       .then((page) => {
         this.messages = page.data;
         console.log('>>>>')
@@ -36,16 +31,5 @@ class MainApp extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    mainReducer: state.mainReducer
-  };
-}
 
-function matchDispatchToProps(dispatch){
-  return bindActionCreators({
-    SayHello: SayHello
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(MainApp);
+export default MainApp;

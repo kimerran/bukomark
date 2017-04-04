@@ -17,6 +17,10 @@ class MessageBox extends React.Component {
     ev.preventDefault();
   }
 
+  isEmptyMessage() {
+    return this.state.newMessage === '' || this.state.newMessage === undefined;
+  }
+
   render() {
     return (
       <div className="ui action input aligned right" style={{display: 'flex'}}>
@@ -25,9 +29,16 @@ class MessageBox extends React.Component {
           style={{minWidth: '200px'}}
           type="text"
           placeholder="Enter your message..."
+          value={this.state.newMessage}
         >
         </input>
-        <button onClick={() => {this.onCreate(this.state.newMessage)}} className="ui button">Send</button>
+        <button
+          disabled={this.isEmptyMessage()}
+          onClick={() => {
+            this.onCreate(this.state.newMessage);
+            this.setState({newMessage: ''});
+          }}
+          className="ui button">Send</button>
       </div>
     );
   }

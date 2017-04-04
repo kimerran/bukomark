@@ -1,25 +1,13 @@
 import React        from "react";
 import ReactDOM     from "react-dom";
-import {Provider}   from "react-redux";
-import thunk        from "redux-thunk";
-import promise      from "redux-promise";
-import createLogger from "redux-logger";
-import allReducers  from "./reducers.index";
-import MainApp      from "./containers/main.container";
-import {
-    createStore,
-    applyMiddleware
-} from "redux";
 
-const feathers = require('feathers-client');
-const io = require('socket.io-client');
+import feathers from 'feathers-client';
+import io from 'socket.io-client';
+import MainApp      from "./containers/main.container";
+
+
 const socket = io();
 const logger = createLogger();
-
-const store = createStore(
-    allReducers,
-    applyMiddleware(thunk, promise, logger)
-);
 
 const app = feathers()
   .configure(feathers.socketio(socket))
@@ -31,9 +19,7 @@ const app = feathers()
 app.authenticate()
   .then(() => {
     ReactDOM.render(
-        <Provider store={store}>
-            <MainApp app={app} />
-        </Provider>,
+        <MainApp app={app} />,
         document.getElementById("root")
     );
   })

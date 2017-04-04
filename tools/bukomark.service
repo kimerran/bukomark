@@ -1,0 +1,14 @@
+[Unit]
+Description=Bukomark Feathers.js
+
+[Service]
+ExecStart=/usr/bin/node /var/www/bukomark/src/index.js
+Restart=always
+User=nobody
+Group=nobody
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=development
+WorkingDirectory=/var/www/bukomark
+
+[Install]
+WantedBy=multi-user.target 
