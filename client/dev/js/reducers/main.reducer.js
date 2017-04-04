@@ -1,5 +1,6 @@
 let defaultState = {
-    message: "Click the button to reveal message"
+    messages: [],
+    cur_user: {}
 }
 
 export default function(state=defaultState, action) {
